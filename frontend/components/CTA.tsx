@@ -7,7 +7,7 @@ import axios from 'axios'
 import PartnershipForm from './PartnershipForm'
 
 export default function CTA() {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000'
+  const apiBaseUrl = "http://209.38.123.167/api"
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,

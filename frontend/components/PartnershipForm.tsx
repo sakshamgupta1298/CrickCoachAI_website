@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import axios from 'axios'
 
 export default function PartnershipForm() {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000'
+  const apiBaseUrl = "http://209.38.123.167/api"
   const [formData, setFormData] = useState({
     name: '',
     email: '',
