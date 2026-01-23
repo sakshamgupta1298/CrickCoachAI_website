@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import axios from 'axios'
 
 export default function PartnershipForm() {
-  const apiBaseUrl = "http://209.38.123.167/api"
+  const apiBaseUrl = "/api"
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +21,7 @@ export default function PartnershipForm() {
     setLoading(true)
 
     try {
-      const response = await axios.post(`${apiBaseUrl}/api/partnership-inquiry`, formData)
+      const response = await axios.post(`${apiBaseUrl}/partnership-inquiry`, formData)
       
       if (response.data.status === 'success') {
         setSuccess(true)

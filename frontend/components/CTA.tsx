@@ -22,7 +22,7 @@ export default function CTA() {
     setLoading(true)
 
     try {
-      const response = await axios.post(`${apiBaseUrl}/api/app-download`, {
+      const response = await axios.post(`${apiBaseUrl}/app-download`, {
         email,
       })
       
