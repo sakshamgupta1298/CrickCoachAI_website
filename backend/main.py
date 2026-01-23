@@ -24,6 +24,8 @@ cors_allow_origins = [
     "http://localhost:3001",
     "http://209.38.123.167",
     "http://209.38.123.167:3000",
+    "http://crickcoachai.com",
+    "http://www.crickcoachai.com",
     "https://crickcoachai.com",
     "https://www.crickcoachai.com",
 ]
