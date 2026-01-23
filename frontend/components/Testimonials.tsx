@@ -26,10 +26,10 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: 'Sarah Williams',
-    role: 'Parent',
+    name: 'Rohit Yadav',
+    role: 'Professional Cricketer',
     image: '👤',
-    text: 'My son has been using CrickCoach AI for 3 months, and his coach has noticed significant improvement in his bowling action. The detailed feedback is incredible.',
+    text: 'I was looking for a better way to work on my batting, and CrickCoach AI turned out to be exactly what I needed. The 3D analysis helped me understand my technique in a much clearer way and make small changes that actually mattered. Knowing where the injury risks were also gave me the confidence to train without second-guessing myself. Within a few weeks, I could genuinely feel the improvement in my consistency and confidence at the crease.',
     rating: 5,
   },
 ]
