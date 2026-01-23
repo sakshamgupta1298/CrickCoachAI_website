@@ -19,11 +19,14 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt install -y nodejs python3 python3-pip python3-venv nginx
 sudo npm install -g pm2
 
-# Clone repository
-cd /var/www
-sudo git clone <YOUR_GIT_REPO_URL> crickcoachai
-sudo chown -R $USER:$USER crickcoachai
-cd crickcoachai
+# Clone repository (if fresh)
+cd /root
+git clone <YOUR_GIT_REPO_URL> CrickCoachAI_website
+cd CrickCoachAI_website
+
+# OR if already exists:
+cd /root/CrickCoachAI_website
+git pull origin main
 ```
 
 ### 2. Backend Setup
@@ -66,11 +69,11 @@ sudo systemctl restart nginx
 ### 5. Start Applications with PM2
 ```bash
 # Backend
-cd /var/www/crickcoachai/backend
+cd /root/CrickCoachAI_website/backend
 pm2 start "source venv/bin/activate && uvicorn main:app --host 127.0.0.1 --port 8000" --name crickcoachai-backend
 
 # Frontend
-cd /var/www/crickcoachai/frontend
+cd /root/CrickCoachAI_website/frontend
 pm2 start "npm start" --name crickcoachai-frontend
 
 # Save PM2 configuration
@@ -102,7 +105,7 @@ sudo ufw enable
 ## Updating After Code Changes
 
 ```bash
-cd /var/www/crickcoachai
+cd /root/CrickCoachAI_website
 git pull origin main
 
 # Restart backend

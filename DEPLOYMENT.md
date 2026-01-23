@@ -40,10 +40,14 @@ sudo npm install -g pm2
 ## Step 2: Clone Your Repository
 
 ```bash
-cd /var/www
-sudo git clone <YOUR_GIT_REPO_URL> crickcoachai
-sudo chown -R $USER:$USER crickcoachai
-cd crickcoachai
+# If cloning fresh:
+cd /root
+git clone <YOUR_GIT_REPO_URL> CrickCoachAI_website
+cd CrickCoachAI_website
+
+# OR if already exists at /root/CrickCoachAI_website:
+cd /root/CrickCoachAI_website
+git pull origin main  # Update to latest code
 ```
 
 ## Step 3: Setup Backend
@@ -215,7 +219,7 @@ sudo certbot --nginx -d crickcoachai.com -d www.crickcoachai.com
 
 **Start Backend:**
 ```bash
-cd /var/www/crickcoachai/backend
+cd /root/CrickCoachAI_website/backend
 source venv/bin/activate
 
 # Create PM2 ecosystem file
@@ -225,8 +229,8 @@ module.exports = {
     name: 'crickcoachai-backend',
     script: 'uvicorn',
     args: 'main:app --host 127.0.0.1 --port 8000',
-    interpreter: '/var/www/crickcoachai/backend/venv/bin/python',
-    cwd: '/var/www/crickcoachai/backend',
+    interpreter: '/root/CrickCoachAI_website/backend/venv/bin/python',
+    cwd: '/root/CrickCoachAI_website/backend',
     instances: 1,
     autorestart: true,
     watch: false,
@@ -246,7 +250,7 @@ pm2 startup  # Follow instructions to enable auto-start on boot
 
 **Start Frontend:**
 ```bash
-cd /var/www/crickcoachai/frontend
+cd /root/CrickCoachAI_website/frontend
 
 # Create PM2 ecosystem file
 cat > ecosystem.config.js << EOF
@@ -255,7 +259,7 @@ module.exports = {
     name: 'crickcoachai-frontend',
     script: 'npm',
     args: 'start',
-    cwd: '/var/www/crickcoachai/frontend',
+    cwd: '/root/CrickCoachAI_website/frontend',
     instances: 1,
     autorestart: true,
     watch: false,
@@ -308,10 +312,10 @@ After=network.target
 
 [Service]
 Type=simple
-User=www-data
-WorkingDirectory=/var/www/crickcoachai/backend
-Environment="PATH=/var/www/crickcoachai/backend/venv/bin"
-ExecStart=/var/www/crickcoachai/backend/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000
+User=root
+WorkingDirectory=/root/CrickCoachAI_website/backend
+Environment="PATH=/root/CrickCoachAI_website/backend/venv/bin"
+ExecStart=/root/CrickCoachAI_website/backend/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000
 Restart=always
 
 [Install]
@@ -326,8 +330,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=www-data
-WorkingDirectory=/var/www/crickcoachai/frontend
+User=root
+WorkingDirectory=/root/CrickCoachAI_website/frontend
 Environment="NODE_ENV=production"
 Environment="PORT=3000"
 ExecStart=/usr/bin/npm start

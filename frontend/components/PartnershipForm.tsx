@@ -137,7 +137,7 @@ export default function PartnershipForm() {
             animate={{ opacity: 1, y: 0 }}
             className="p-4 bg-accent/20 border border-accent rounded-lg text-accent text-center"
           >
-            ✓ Thank you for your interest! We'll be in touch soon.
+            ✓ Thank you for your interest! We&apos;ll be in touch soon.
           </motion.div>
         )}
       </motion.form>

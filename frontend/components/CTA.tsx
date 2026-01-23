@@ -118,7 +118,7 @@ export default function CTA() {
               Partner With Us
             </h3>
             <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-              Are you a coach, academy, or club? Let's work together to elevate cricket performance.
+              Are you a coach, academy, or club? Let&apos;s work together to elevate cricket performance.
             </p>
             <PartnershipForm />
           </motion.div>
