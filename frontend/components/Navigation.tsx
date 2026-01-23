@@ -3,10 +3,13 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +20,7 @@ export default function Navigation() {
   }, [])
 
   const navItems = [
+    { name: 'About Us', href: '/about' },
     { name: 'Features', href: '#features' },
     { name: 'How It Works', href: '#how-it-works' },
     { name: 'Testimonials', href: '#testimonials' },
@@ -33,7 +37,7 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <Link href="/" className="flex items-center">
             <div className="w-14 h-14 rounded-lg flex items-center justify-center overflow-hidden">
               <Image
                 src="/logo-icon.png"
@@ -44,20 +48,26 @@ export default function Navigation() {
               />
             </div>
             <span className="text-xl font-bold text-gradient -ml-2">CrickCoach AI</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium"
-              >
-                {item.name}
-              </a>
-            ))}
-            <a href="#download" className="btn-premium">
+            {navItems.map((item) => {
+              const isExternal = item.href.startsWith('#') || item.href.startsWith('http')
+              const Component = isExternal ? 'a' : Link
+              const props = isExternal ? { href: item.href } : { href: item.href }
+              
+              return (
+                <Component
+                  key={item.name}
+                  {...props}
+                  className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium"
+                >
+                  {item.name}
+                </Component>
+              )
+            })}
+            <a href="/#download" className="btn-premium">
               Download App
             </a>
           </div>
@@ -86,17 +96,23 @@ export default function Navigation() {
               exit={{ opacity: 0, height: 0 }}
               className="md:hidden mt-4 space-y-4 pb-4"
             >
-              {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="block text-gray-300 hover:text-accent transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
-              <a href="#download" className="btn-premium w-full mt-4 block text-center" onClick={() => setMobileMenuOpen(false)}>
+              {navItems.map((item) => {
+                const isExternal = item.href.startsWith('#') || item.href.startsWith('http')
+                const Component = isExternal ? 'a' : Link
+                const props = isExternal ? { href: item.href } : { href: item.href }
+                
+                return (
+                  <Component
+                    key={item.name}
+                    {...props}
+                    className="block text-gray-300 hover:text-accent transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Component>
+                )
+              })}
+              <a href="/#download" className="btn-premium w-full mt-4 block text-center" onClick={() => setMobileMenuOpen(false)}>
                 Download App
               </a>
             </motion.div>

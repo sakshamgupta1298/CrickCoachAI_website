@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -13,7 +14,7 @@ export default function Footer() {
       { name: 'Download App', href: '#download' },
     ],
     company: [
-      { name: 'About Us', href: '#' },
+      { name: 'About Us', href: '/about' },
       { name: 'Blog', href: '#' },
       { name: 'Careers', href: '#' },
       { name: 'Contact', href: '#' },
@@ -70,16 +71,22 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
-              {links.company.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-accent transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+              {links.company.map((link) => {
+                const isExternal = link.href.startsWith('#') || link.href.startsWith('http')
+                const Component = isExternal ? 'a' : Link
+                const props = isExternal ? { href: link.href } : { href: link.href }
+                
+                return (
+                  <li key={link.name}>
+                    <Component
+                      {...props}
+                      className="text-gray-400 hover:text-accent transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Component>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 
