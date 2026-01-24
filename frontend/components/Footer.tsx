@@ -10,20 +10,17 @@ export default function Footer() {
     product: [
       { name: 'Features', href: '#features' },
       { name: 'How It Works', href: '#how-it-works' },
-      { name: 'Pricing', href: '#' },
       { name: 'Download App', href: '#download' },
     ],
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Blog', href: '#' },
-      { name: 'Careers', href: '#' },
-      { name: 'Contact', href: '#' },
+      { name: 'Contact', href: '/contact' },
     ],
     resources: [
-      { name: 'Documentation', href: '#' },
       { name: 'Support', href: '#' },
       { name: 'Partnership', href: '#partnership' },
-      { name: 'Privacy Policy', href: '#' },
+      { name: 'Privacy Policy', href: '/privacy' },
     ],
   }
 
@@ -94,16 +91,22 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">Resources</h4>
             <ul className="space-y-2">
-              {links.resources.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-accent transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+              {links.resources.map((link) => {
+                const isExternal = link.href.startsWith('#') || link.href.startsWith('http')
+                const Component = isExternal ? 'a' : Link
+                const props = isExternal ? { href: link.href } : { href: link.href }
+                
+                return (
+                  <li key={link.name}>
+                    <Component
+                      {...props}
+                      className="text-gray-400 hover:text-accent transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Component>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </div>
@@ -115,13 +118,7 @@ export default function Footer() {
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-accent transition-colors text-sm">
-              Twitter
-            </a>
-            <a href="#" className="text-gray-400 hover:text-accent transition-colors text-sm">
               LinkedIn
-            </a>
-            <a href="#" className="text-gray-400 hover:text-accent transition-colors text-sm">
-              Instagram
             </a>
           </div>
         </div>

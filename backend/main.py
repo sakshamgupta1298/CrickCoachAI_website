@@ -304,6 +304,114 @@ def _send_partnership_inquiry_email_safe(inquiry: PartnershipInquiry) -> None:
         print(f"[partnership-inquiry] FAILED to send email for inquiry from {inquiry.email}: {e}")
         traceback.print_exc()
 
+def _send_contact_form_email(contact: ContactForm) -> None:
+    """
+    Sends contact form email to admin@crickcoachai.com with all form details.
+    """
+    # SMTP2GO hardcoded settings
+    smtp_host = "mail.smtp2go.com"
+    smtp_port = 2525  # SMTP2GO default port
+    smtp_user = "elevateai.co.in"
+    smtp_password = "2btuslti469KsVv7"
+    from_email = "CrickCoach AI <noreply@crickcoachai.com>"  # Verified domain
+    admin_email = "admin@crickcoachai.com"
+
+    if not smtp_host or not smtp_user or not smtp_password or not from_email:
+        raise RuntimeError("SMTP is not configured.")
+
+    msg = EmailMessage()
+    msg["Subject"] = f"Contact Form: {contact.subject}"
+    msg["From"] = from_email
+    msg["To"] = admin_email
+    msg["Reply-To"] = contact.email  # So admin can reply directly to the sender
+    
+    # Create both plain text and HTML versions
+    plain_text = f"""New Contact Form Submission
+
+Subject: {contact.subject}
+Name: {contact.name}
+Email: {contact.email}
+
+Message:
+{contact.message}
+
+---
+You can reply directly to this email to respond to {contact.name} at {contact.email}."""
+
+    html_content = f"""<html>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <h2 style="color: #2c3e50;">New Contact Form Submission</h2>
+    
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+        <tr>
+            <td style="padding: 8px; background-color: #f4f4f4; font-weight: bold; width: 150px;">Subject:</td>
+            <td style="padding: 8px;">{contact.subject}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; background-color: #f4f4f4; font-weight: bold;">Name:</td>
+            <td style="padding: 8px;">{contact.name}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; background-color: #f4f4f4; font-weight: bold;">Email:</td>
+            <td style="padding: 8px;"><a href="mailto:{contact.email}" style="color: #3498db;">{contact.email}</a></td>
+        </tr>
+    </table>
+    
+    <h3 style="color: #2c3e50; margin-top: 30px;">Message:</h3>
+    <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #3498db; margin: 20px 0;">
+        <p style="white-space: pre-wrap; margin: 0;">{contact.message}</p>
+    </div>
+    
+    <p style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #7f8c8d;">
+        You can reply directly to this email to respond to <strong>{contact.name}</strong> at 
+        <a href="mailto:{contact.email}" style="color: #3498db;">{contact.email}</a>.
+    </p>
+</body>
+</html>"""
+    
+    msg.set_content(plain_text)
+    msg.add_alternative(html_content, subtype='html')
+
+    # SMTP2GO SSL ports: 465, 8465, 443
+    # TLS ports: 2525 (default), 8025, 587, 80, 25
+    ssl_ports = [465, 8465, 443]
+    
+    try:
+        if smtp_port in ssl_ports:
+            # Use SSL connection for SSL ports
+            with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=30) as server:
+                server.login(smtp_user, smtp_password)
+                server.send_message(msg)
+        else:
+            # Use TLS connection for TLS ports
+            with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
+                server.set_debuglevel(0)
+                server.starttls()
+                server.login(smtp_user, smtp_password)
+                server.send_message(msg)
+    except smtplib.SMTPAuthenticationError as e:
+        error_msg = f"SMTP Authentication failed. Check your username and password. Error: {e}"
+        print(f"[SMTP ERROR] {error_msg}")
+        print(f"[SMTP DEBUG] Host: {smtp_host}, Port: {smtp_port}, User: {smtp_user}")
+        raise RuntimeError(error_msg) from e
+    except smtplib.SMTPSenderRefused as e:
+        error_msg = f"SMTP sender error: {e}"
+        print(f"[SMTP ERROR] {error_msg}")
+        raise RuntimeError(error_msg) from e
+    except Exception as e:
+        error_msg = f"Failed to send contact form email via SMTP2GO: {e}"
+        print(f"[SMTP ERROR] {error_msg}")
+        raise RuntimeError(error_msg) from e
+
+def _send_contact_form_email_safe(contact: ContactForm) -> None:
+    """BackgroundTasks helper: never raises (so failures are logged instead of swallowed)."""
+    try:
+        _send_contact_form_email(contact)
+        print(f"[contact-form] Email sent to admin@crickcoachai.com for contact from {contact.email}")
+    except Exception as e:
+        print(f"[contact-form] FAILED to send email for contact from {contact.email}: {e}")
+        traceback.print_exc()
+
 class ContactForm(BaseModel):
     name: str
     email: EmailStr
@@ -399,18 +507,29 @@ async def request_app_download(request: AppDownloadRequest, background_tasks: Ba
         raise HTTPException(status_code=500, detail=f"Failed to send email: {error_msg}")
 
 @app.post("/api/contact")
-async def submit_contact_form(contact: ContactForm):
+async def submit_contact_form(contact: ContactForm, background_tasks: BackgroundTasks):
     """
     General contact form submission.
+    Sends email notification to admin@crickcoachai.com.
     """
     try:
-        # TODO: Implement email sending
+        # Send email notification to admin
+        send_mode = os.getenv("EMAIL_SEND_MODE", "sync").lower().strip()
+        if send_mode == "background":
+            background_tasks.add_task(_send_contact_form_email_safe, contact)
+        else:
+            _send_contact_form_email(contact)
+        
         return {
             "status": "success",
             "message": "Thank you for reaching out. We'll respond shortly."
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        error_msg = str(e)
+        error_trace = traceback.format_exc()
+        print(f"[ERROR] Failed to send contact form email:")
+        print(error_trace)
+        raise HTTPException(status_code=500, detail=f"Failed to submit contact form: {error_msg}")
 
 @app.get("/api/stats")
 async def get_platform_stats():
