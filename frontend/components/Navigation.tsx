@@ -66,6 +66,7 @@ export default function Navigation() {
 
   const navItems = [
     { name: 'About Us', href: '/about' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Features', href: '#features' },
     { name: 'How It Works', href: '#how-it-works' },
     { name: 'Testimonials', href: '#testimonials' },
