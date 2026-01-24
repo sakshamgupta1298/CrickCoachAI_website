@@ -43,8 +43,25 @@ export default function Navigation() {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     } else {
-      // On another page, navigate to home then scroll
+      // On another page, navigate to home page with hash (always use absolute path)
       window.location.href = `/${hash}`
+    }
+  }
+  
+  const handleDownloadClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    setMobileMenuOpen(false)
+    
+    if (pathname === '/') {
+      // Already on home page, just scroll to download section
+      const element = document.querySelector('#download')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    } else {
+      // On another page, navigate to home page with #download hash
+      // Use router.push for client-side navigation, then scroll
+      window.location.href = '/#download'
     }
   }
 
@@ -83,11 +100,11 @@ export default function Navigation() {
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => {
               if (item.href.startsWith('#')) {
-                // Hash link - handle smooth scroll
+                // Hash link - always use absolute path to home page
                 return (
                   <a
                     key={item.name}
-                    href={pathname === '/' ? item.href : `/${item.href}`}
+                    href={`/${item.href}`}
                     onClick={(e) => handleHashClick(e, item.href)}
                     className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium"
                   >
@@ -108,8 +125,8 @@ export default function Navigation() {
               }
             })}
             <a 
-              href={pathname === '/' ? '#download' : '/#download'} 
-              onClick={(e) => handleHashClick(e, '#download')}
+              href="/#download" 
+              onClick={handleDownloadClick}
               className="btn-premium"
             >
               Download App
@@ -142,11 +159,11 @@ export default function Navigation() {
             >
               {navItems.map((item) => {
                 if (item.href.startsWith('#')) {
-                  // Hash link - handle smooth scroll
+                  // Hash link - always use absolute path to home page
                   return (
                     <a
                       key={item.name}
-                      href={pathname === '/' ? item.href : `/${item.href}`}
+                      href={`/${item.href}`}
                       onClick={(e) => handleHashClick(e, item.href)}
                       className="block text-gray-300 hover:text-accent transition-colors"
                     >
@@ -168,8 +185,8 @@ export default function Navigation() {
                 }
               })}
               <a 
-                href={pathname === '/' ? '#download' : '/#download'} 
-                onClick={(e) => handleHashClick(e, '#download')}
+                href="/#download" 
+                onClick={handleDownloadClick}
                 className="btn-premium w-full mt-4 block text-center"
               >
                 Download App

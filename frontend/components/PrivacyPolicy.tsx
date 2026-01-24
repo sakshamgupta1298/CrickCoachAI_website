@@ -1,13 +1,19 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 export default function PrivacyPolicy() {
+  const [mounted, setMounted] = useState(false)
   const { ref, inView } = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
+    threshold: 0.1,
+    triggerOnce: false,
   })
+  
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <section
@@ -27,7 +33,7 @@ export default function PrivacyPolicy() {
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          animate={(inView || mounted) ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
@@ -35,7 +41,7 @@ export default function PrivacyPolicy() {
           <div className="text-center mb-12">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={(inView || mounted) ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-4xl md:text-6xl font-bold mb-4"
             >
@@ -43,7 +49,7 @@ export default function PrivacyPolicy() {
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={(inView || mounted) ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-gray-400 text-lg"
             >
@@ -56,7 +62,7 @@ export default function PrivacyPolicy() {
             {/* Introduction */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={(inView || mounted) ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
