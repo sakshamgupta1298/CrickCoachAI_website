@@ -19,6 +19,35 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Handle hash navigation when landing on home page
+  useEffect(() => {
+    if (pathname === '/' && window.location.hash) {
+      const hash = window.location.hash
+      setTimeout(() => {
+        const element = document.querySelector(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+  }, [pathname])
+
+  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault()
+    setMobileMenuOpen(false)
+    
+    if (pathname === '/') {
+      // Already on home page, just scroll to section
+      const element = document.querySelector(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    } else {
+      // On another page, navigate to home then scroll
+      window.location.href = `/${hash}`
+    }
+  }
+
   const navItems = [
     { name: 'About Us', href: '/about' },
     { name: 'Features', href: '#features' },
@@ -53,21 +82,36 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => {
-              const isExternal = item.href.startsWith('#') || item.href.startsWith('http')
-              const Component = isExternal ? 'a' : Link
-              const props = isExternal ? { href: item.href } : { href: item.href }
-              
-              return (
-                <Component
-                  key={item.name}
-                  {...props}
-                  className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium"
-                >
-                  {item.name}
-                </Component>
-              )
+              if (item.href.startsWith('#')) {
+                // Hash link - handle smooth scroll
+                return (
+                  <a
+                    key={item.name}
+                    href={pathname === '/' ? item.href : `/${item.href}`}
+                    onClick={(e) => handleHashClick(e, item.href)}
+                    className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium"
+                  >
+                    {item.name}
+                  </a>
+                )
+              } else {
+                // Regular link
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                )
+              }
             })}
-            <a href="/#download" className="btn-premium">
+            <a 
+              href={pathname === '/' ? '#download' : '/#download'} 
+              onClick={(e) => handleHashClick(e, '#download')}
+              className="btn-premium"
+            >
               Download App
             </a>
           </div>
@@ -97,22 +141,37 @@ export default function Navigation() {
               className="md:hidden mt-4 space-y-4 pb-4"
             >
               {navItems.map((item) => {
-                const isExternal = item.href.startsWith('#') || item.href.startsWith('http')
-                const Component = isExternal ? 'a' : Link
-                const props = isExternal ? { href: item.href } : { href: item.href }
-                
-                return (
-                  <Component
-                    key={item.name}
-                    {...props}
-                    className="block text-gray-300 hover:text-accent transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Component>
-                )
+                if (item.href.startsWith('#')) {
+                  // Hash link - handle smooth scroll
+                  return (
+                    <a
+                      key={item.name}
+                      href={pathname === '/' ? item.href : `/${item.href}`}
+                      onClick={(e) => handleHashClick(e, item.href)}
+                      className="block text-gray-300 hover:text-accent transition-colors"
+                    >
+                      {item.name}
+                    </a>
+                  )
+                } else {
+                  // Regular link
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="block text-gray-300 hover:text-accent transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  )
+                }
               })}
-              <a href="/#download" className="btn-premium w-full mt-4 block text-center" onClick={() => setMobileMenuOpen(false)}>
+              <a 
+                href={pathname === '/' ? '#download' : '/#download'} 
+                onClick={(e) => handleHashClick(e, '#download')}
+                className="btn-premium w-full mt-4 block text-center"
+              >
                 Download App
               </a>
             </motion.div>
