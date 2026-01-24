@@ -55,14 +55,6 @@ export default function PrivacyPolicy() {
             >
               Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={(inView || mounted) ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-gray-400 text-sm mt-2"
-            >
-              by <span className="text-accent">AthcoaSpace AI</span>
-            </motion.p>
           </div>
 
           {/* Content Sections */}
@@ -294,18 +286,6 @@ export default function PrivacyPolicy() {
               </div>
             </motion.div>
           </div>
-
-          {/* Attribution */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 1.6 }}
-            className="text-center mt-12"
-          >
-            <p className="text-gray-400 text-sm">
-              by <span className="text-accent">AthcoaSpace AI</span>
-            </p>
-          </motion.div>
         </motion.div>
       </div>
     </section>
