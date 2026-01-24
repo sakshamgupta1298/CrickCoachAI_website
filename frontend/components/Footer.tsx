@@ -48,7 +48,6 @@ export default function Footer() {
       { name: 'Contact', href: '/contact' },
     ],
     resources: [
-      { name: 'Support', href: '#' },
       { name: 'Partnership', href: '#partnership' },
       { name: 'Privacy Policy', href: '/privacy' },
     ],
