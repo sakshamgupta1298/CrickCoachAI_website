@@ -1,16 +1,46 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const pathname = usePathname()
+
+  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      // Already on home page, scroll to section
+      const element = document.querySelector(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    } else {
+      // On another page, navigate to home page with hash
+      window.location.href = `/${hash}`
+    }
+  }
+
+  const handleDownloadClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      // On home page, scroll to download section
+      const element = document.querySelector('#download')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    } else {
+      // On another page, navigate to /download page
+      window.location.href = '/download'
+    }
+  }
 
   const links = {
     product: [
-      { name: 'Features', href: '#features' },
-      { name: 'How It Works', href: '#how-it-works' },
-      { name: 'Download App', href: '#download' },
+      { name: 'Features', href: '#features', isHash: true, isDownload: false },
+      { name: 'How It Works', href: '#how-it-works', isHash: true, isDownload: false },
+      { name: 'Download App', href: '#download', isHash: true, isDownload: true },
     ],
     company: [
       { name: 'About Us', href: '/about' },
@@ -51,16 +81,47 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">Product</h4>
             <ul className="space-y-2">
-              {links.product.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-accent transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+              {links.product.map((link) => {
+                if (link.isDownload) {
+                  // Download App - special handling
+                  return (
+                    <li key={link.name}>
+                      <a
+                        href={pathname === '/' ? '#download' : '/download'}
+                        onClick={handleDownloadClick}
+                        className="text-gray-400 hover:text-accent transition-colors text-sm"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  )
+                } else if (link.isHash) {
+                  // Hash link - navigate to home page section
+                  return (
+                    <li key={link.name}>
+                      <a
+                        href={`/${link.href}`}
+                        onClick={(e) => handleHashClick(e, link.href)}
+                        className="text-gray-400 hover:text-accent transition-colors text-sm"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  )
+                } else {
+                  // Regular link
+                  return (
+                    <li key={link.name}>
+                      <Link
+                        href={link.href}
+                        className="text-gray-400 hover:text-accent transition-colors text-sm"
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  )
+                }
+              })}
             </ul>
           </div>
 
@@ -92,20 +153,46 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Resources</h4>
             <ul className="space-y-2">
               {links.resources.map((link) => {
-                const isExternal = link.href.startsWith('#') || link.href.startsWith('http')
-                const Component = isExternal ? 'a' : Link
-                const props = isExternal ? { href: link.href } : { href: link.href }
-                
-                return (
-                  <li key={link.name}>
-                    <Component
-                      {...props}
-                      className="text-gray-400 hover:text-accent transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Component>
-                  </li>
-                )
+                if (link.href.startsWith('#')) {
+                  // Hash link - navigate to home page section
+                  return (
+                    <li key={link.name}>
+                      <a
+                        href={`/${link.href}`}
+                        onClick={(e) => handleHashClick(e, link.href)}
+                        className="text-gray-400 hover:text-accent transition-colors text-sm"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  )
+                } else if (link.href.startsWith('http')) {
+                  // External link
+                  return (
+                    <li key={link.name}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-accent transition-colors text-sm"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  )
+                } else {
+                  // Internal link
+                  return (
+                    <li key={link.name}>
+                      <Link
+                        href={link.href}
+                        className="text-gray-400 hover:text-accent transition-colors text-sm"
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  )
+                }
               })}
             </ul>
           </div>
