@@ -206,7 +206,7 @@ export default function Blog() {
 
             {/* CTA Button */}
             <div className="text-center pt-8 border-t border-gray-700 mt-12">
-              <a href="/#download" className="btn-premium text-lg inline-block">
+              <a href="/download" className="btn-premium text-lg inline-block">
                 Download CrickCoach AI
               </a>
             </div>

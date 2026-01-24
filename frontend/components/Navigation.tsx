@@ -53,15 +53,14 @@ export default function Navigation() {
     setMobileMenuOpen(false)
     
     if (pathname === '/') {
-      // Already on home page, just scroll to download section
+      // On home page, scroll to download section
       const element = document.querySelector('#download')
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     } else {
-      // On another page, navigate to home page with #download hash
-      // Use router.push for client-side navigation, then scroll
-      window.location.href = '/#download'
+      // On another page, navigate to /download page
+      window.location.href = '/download'
     }
   }
 
@@ -125,7 +124,7 @@ export default function Navigation() {
               }
             })}
             <a 
-              href="/#download" 
+              href={pathname === '/' ? '#download' : '/download'} 
               onClick={handleDownloadClick}
               className="btn-premium"
             >
@@ -185,7 +184,7 @@ export default function Navigation() {
                 }
               })}
               <a 
-                href="/#download" 
+                href={pathname === '/' ? '#download' : '/download'} 
                 onClick={handleDownloadClick}
                 className="btn-premium w-full mt-4 block text-center"
               >
