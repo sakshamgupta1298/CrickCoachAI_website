@@ -1,18 +1,24 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 export default function Blog() {
+  const [mounted, setMounted] = useState(false)
   const { ref, inView } = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
+    threshold: 0.1,
+    triggerOnce: false,
   })
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <section
       ref={ref}
-      className="section relative overflow-hidden min-h-screen"
+      className="section relative overflow-hidden min-h-screen pt-24 md:pt-32"
       id="blog"
     >
       {/* Background with gradient */}
@@ -24,10 +30,10 @@ export default function Blog() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-dark rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-20">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-8 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          animate={mounted && inView ? { opacity: 1, y: 0 } : mounted ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
@@ -35,7 +41,7 @@ export default function Blog() {
           <div className="text-center mb-12">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={mounted && inView ? { opacity: 1, y: 0 } : mounted ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-4xl md:text-6xl font-bold mb-6"
             >
@@ -43,7 +49,7 @@ export default function Blog() {
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={mounted && inView ? { opacity: 1, y: 0 } : mounted ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-gray-400 text-lg"
             >
@@ -54,9 +60,9 @@ export default function Blog() {
           {/* Article Content */}
           <motion.article
             initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            animate={mounted && inView ? { opacity: 1, y: 0 } : mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12 space-y-6"
+            className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-6 md:p-12 space-y-6"
           >
             <p className="text-gray-300 leading-relaxed text-lg">
               Cricket has always been a game of skill, discipline, and constant refinement. From adjusting a batsman&apos;s backlift to correcting a bowler&apos;s release point, even the smallest technical change can make a massive difference. Traditionally, these improvements relied heavily on in-person coaching, video replays, and subjective judgment.
