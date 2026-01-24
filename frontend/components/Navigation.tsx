@@ -92,7 +92,10 @@ export default function Navigation() {
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="text-xl font-bold text-gradient -ml-2">CrickCoach AI</span>
+            <div className="flex flex-col -ml-2">
+              <span className="text-xl font-bold text-gradient">CrickCoach AI</span>
+              <span className="text-xs text-gray-400">by <span className="text-accent">AthcoaSpace AI</span></span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

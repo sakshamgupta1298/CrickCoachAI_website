@@ -49,6 +49,14 @@ export default function Blog() {
             >
               Inside CrickCoach AI
             </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-gray-400 text-sm mt-2"
+            >
+              by <span className="text-accent">AthcoaSpace AI</span>
+            </motion.p>
           </div>
 
           {/* Article Content */}

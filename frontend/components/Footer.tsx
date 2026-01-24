@@ -200,9 +200,14 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            © {currentYear} CrickCoach AI. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center md:items-start">
+            <p className="text-gray-400 text-sm">
+              © {currentYear} CrickCoach AI. All rights reserved.
+            </p>
+            <p className="text-gray-400 text-xs mt-1">
+              by <span className="text-accent">AthcoaSpace AI</span>
+            </p>
+          </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-accent transition-colors text-sm">
               LinkedIn

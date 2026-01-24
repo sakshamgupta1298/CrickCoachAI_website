@@ -92,6 +92,14 @@ export default function Contact() {
             >
               Have a question or feedback? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
             </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-gray-400 text-sm mt-2"
+            >
+              by <span className="text-accent">AthcoaSpace AI</span>
+            </motion.p>
           </div>
 
           {/* Contact Information Cards */}

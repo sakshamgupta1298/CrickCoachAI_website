@@ -122,6 +122,18 @@ export default function CTA() {
             </p>
             <PartnershipForm />
           </motion.div>
+
+          {/* Attribution */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-center mt-12 pt-8 border-t border-gray-800"
+          >
+            <p className="text-gray-400 text-sm">
+              by <span className="text-accent">AthcoaSpace AI</span>
+            </p>
+          </motion.div>
         </motion.div>
       </div>
     </section>
