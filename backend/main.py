@@ -53,6 +53,12 @@ class AppDownloadRequest(BaseModel):
     email: EmailStr
     name: Optional[str] = None
 
+class ContactForm(BaseModel):
+    name: str
+    email: EmailStr
+    subject: str
+    message: str
+
 
 def _send_apk_email(to_email: str) -> None:
     """
@@ -411,12 +417,6 @@ def _send_contact_form_email_safe(contact: ContactForm) -> None:
     except Exception as e:
         print(f"[contact-form] FAILED to send email for contact from {contact.email}: {e}")
         traceback.print_exc()
-
-class ContactForm(BaseModel):
-    name: str
-    email: EmailStr
-    subject: str
-    message: str
 
 @app.get("/")
 async def root():
