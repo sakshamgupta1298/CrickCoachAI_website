@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = useState(false)
+  const [showVideoModal, setShowVideoModal] = useState(false)
   const [particles, setParticles] = useState<Array<{ x: number; y: number; targetY: number; duration: number; delay: number }>>([])
 
   useEffect(() => {
@@ -112,7 +113,10 @@ export default function Hero() {
             <a href="#download" className="btn-premium text-lg">
               Download App
             </a>
-            <button className="btn-premium-outline text-lg">
+            <button 
+              onClick={() => setShowVideoModal(true)}
+              className="btn-premium-outline text-lg"
+            >
               Watch Demo
             </button>
           </motion.div>
@@ -137,6 +141,49 @@ export default function Hero() {
           </svg>
         </motion.div>
       </motion.div>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {showVideoModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            onClick={() => setShowVideoModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-5xl mx-4 bg-charcoal rounded-2xl overflow-hidden shadow-2xl"
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setShowVideoModal(false)}
+                className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors"
+                aria-label="Close video"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Video container */}
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  src="https://drive.google.com/file/d/1RPEeEi-L3QhhSURp_GUvFMvzxGW8a7T-/preview"
+                  className="absolute top-0 left-0 w-full h-full"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  title="CrickCoach AI Demo Video"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
