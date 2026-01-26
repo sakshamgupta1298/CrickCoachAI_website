@@ -19,6 +19,18 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
+
   // Handle hash navigation when landing on home page
   useEffect(() => {
     if (pathname === '/' && window.location.hash) {
@@ -77,7 +89,7 @@ export default function Navigation() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
         scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
@@ -148,50 +160,92 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 space-y-4 pb-4"
-            >
-              {navItems.map((item) => {
-                if (item.href.startsWith('#')) {
-                  // Hash link - always use absolute path to home page
-                  return (
-                    <a
-                      key={item.name}
-                      href={`/${item.href}`}
-                      onClick={(e) => handleHashClick(e, item.href)}
-                      className="block text-gray-300 hover:text-accent transition-colors"
-                    >
-                      {item.name}
-                    </a>
-                  )
-                } else {
-                  // Regular link
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="block text-gray-300 hover:text-accent transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  )
-                }
-              })}
-              <a 
-                href={pathname === '/' ? '#download' : '/download'} 
-                onClick={handleDownloadClick}
-                className="btn-premium w-full mt-4 block text-center"
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] md:hidden"
+              />
+              {/* Menu Panel */}
+              <motion.div
+                initial={{ opacity: 0, x: '100%' }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="fixed top-0 right-0 bottom-0 w-80 bg-charcoal shadow-2xl z-[60] md:hidden overflow-y-auto"
               >
-                Download App
-              </a>
-            </motion.div>
+                <div className="p-6">
+                  {/* Menu Header */}
+                  <div className="flex items-center justify-between mb-8">
+                    <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
+                      <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden">
+                        <Image
+                          src="/logo-icon.png"
+                          alt="CrickCoach AI Logo"
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <span className="text-lg font-bold text-gradient -ml-2">CrickCoach AI</span>
+                    </Link>
+                    <button
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-white hover:text-accent transition-colors p-2"
+                      aria-label="Close menu"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Menu Items */}
+                  <nav className="space-y-6">
+                    {navItems.map((item) => {
+                      if (item.href.startsWith('#')) {
+                        // Hash link - always use absolute path to home page
+                        return (
+                          <a
+                            key={item.name}
+                            href={`/${item.href}`}
+                            onClick={(e) => handleHashClick(e, item.href)}
+                            className="block text-white hover:text-accent transition-colors text-lg font-medium py-2"
+                          >
+                            {item.name}
+                          </a>
+                        )
+                      } else {
+                        // Regular link
+                        return (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className="block text-white hover:text-accent transition-colors text-lg font-medium py-2"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {item.name}
+                          </Link>
+                        )
+                      }
+                    })}
+                    <a 
+                      href={pathname === '/' ? '#download' : '/download'} 
+                      onClick={handleDownloadClick}
+                      className="btn-premium w-full mt-6 block text-center"
+                    >
+                      Download App
+                    </a>
+                  </nav>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>
