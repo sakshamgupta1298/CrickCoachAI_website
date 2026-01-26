@@ -104,6 +104,10 @@ export default function CTA() {
                 </motion.div>
               )}
             </form>
+            
+            <p className="text-gray-500 text-sm mt-6">
+              Coming soon on iOS devices
+            </p>
           </motion.div>
 
           {/* Partnership CTA */}
