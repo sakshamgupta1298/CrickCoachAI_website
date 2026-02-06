@@ -188,6 +188,167 @@ def _send_apk_email_safe(to_email: str) -> None:
         print(f"[app-download] FAILED to send APK email to {to_email}: {e}")
         traceback.print_exc()
 
+def _send_ios_email(to_email: str) -> None:
+    """
+    Sends a TestFlight link for the iOS app via email.
+    Requires SMTP_* env vars configured.
+    """
+    # SMTP2GO hardcoded settings
+    smtp_host = "mail.smtp2go.com"
+    smtp_port = 2525  # SMTP2GO default port
+    smtp_user = "elevateai.co.in"
+    smtp_password = "2btuslti469KsVv7"
+    from_email = "CrickCoach AI <noreply@crickcoachai.com>"  # Verified domain
+
+    # TestFlight link
+    testflight_link = "https://testflight.apple.com/join/2kmw2qFN"
+
+    if not smtp_host or not smtp_user or not smtp_password or not from_email:
+        raise RuntimeError("SMTP is not configured. Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD (and optionally SMTP_FROM).")
+
+    msg = EmailMessage()
+    msg["Subject"] = "CrickCoach AI — iOS TestFlight Beta Access"
+    msg["From"] = from_email
+    msg["To"] = to_email
+    
+    # Create both plain text and HTML versions
+    plain_text = f"""Thanks for your interest in CrickCoach AI!
+
+Join our iOS beta testing program using TestFlight:
+
+{testflight_link}
+
+Installation Instructions:
+
+Step 1: Install TestFlight
+- Open the App Store on your iPhone, iPad, or Mac
+- Search for "TestFlight" and install it (it's free)
+
+Step 2: Join the Beta
+- Open the TestFlight link above on your iOS device: {testflight_link}
+- Tap "Accept" to join the CrickCoach AI beta
+- Tap "Install" to download the app to your device
+
+Step 3: Start Testing
+- Once installed, you'll see the CrickCoach AI app with an orange dot (indicating it's a beta)
+- Open the app and start using it!
+
+Important Notes:
+- You need iOS 16 or later (iPhone/iPad) or macOS 13 or later (Mac)
+- The beta build is available for testing for up to 90 days
+- You'll receive notifications when new beta builds are available
+- This is an early beta version - features and performance are continuously improving
+
+If you have any issues installing or using the app, reply to this email.
+
+Best regards,
+CrickCoach AI Team"""
+    
+    html_content = f"""<html>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <h2 style="color: #2c3e50;">Thanks for your interest in CrickCoach AI!</h2>
+    
+    <p>Join our iOS beta testing program using TestFlight:</p>
+    
+    <p style="margin: 20px 0;">
+        <a href="{testflight_link}" 
+           style="display: inline-block; padding: 12px 24px; background-color: #007AFF; 
+                  color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            Join TestFlight Beta
+        </a>
+    </p>
+    
+    <p>Or copy this link: <a href="{testflight_link}" style="color: #007AFF;">{testflight_link}</a></p>
+    
+    <h3 style="color: #2c3e50; margin-top: 30px;">Installation Instructions:</h3>
+    
+    <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h4 style="color: #2c3e50; margin-top: 0;">Step 1: Install TestFlight</h4>
+        <ul style="line-height: 2;">
+            <li>Open the App Store on your iPhone, iPad, or Mac</li>
+            <li>Search for "TestFlight" and install it (it's free)</li>
+        </ul>
+        
+        <h4 style="color: #2c3e50; margin-top: 20px;">Step 2: Join the Beta</h4>
+        <ul style="line-height: 2;">
+            <li>Open the TestFlight link above on your iOS device</li>
+            <li>Tap "Accept" to join the CrickCoach AI beta</li>
+            <li>Tap "Install" to download the app to your device</li>
+        </ul>
+        
+        <h4 style="color: #2c3e50; margin-top: 20px;">Step 3: Start Testing</h4>
+        <ul style="line-height: 2;">
+            <li>Once installed, you'll see the CrickCoach AI app with an orange dot (indicating it's a beta)</li>
+            <li>Open the app and start using it!</li>
+        </ul>
+    </div>
+    
+    <div style="background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; border-radius: 4px;">
+        <h4 style="color: #856404; margin-top: 0;">Important Notes:</h4>
+        <ul style="line-height: 2; color: #856404;">
+            <li>You need iOS 16 or later (iPhone/iPad) or macOS 13 or later (Mac)</li>
+            <li>The beta build is available for testing for up to 90 days</li>
+            <li>You'll receive notifications when new beta builds are available</li>
+            <li>This is an early beta version - features and performance are continuously improving</li>
+        </ul>
+    </div>
+    
+    <p style="margin-top: 30px; color: #7f8c8d;">
+        If you have any issues installing or using the app, reply to this email.
+    </p>
+    
+    <p style="margin-top: 20px;">
+        Best regards,<br>
+        <strong>CrickCoach AI Team</strong>
+    </p>
+</body>
+</html>"""
+    
+    msg.set_content(plain_text)
+    msg.add_alternative(html_content, subtype='html')
+
+    # SMTP2GO SSL ports: 465, 8465, 443
+    # TLS ports: 2525 (default), 8025, 587, 80, 25
+    ssl_ports = [465, 8465, 443]
+    
+    try:
+        if smtp_port in ssl_ports:
+            # Use SSL connection for SSL ports
+            with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=30) as server:
+                server.login(smtp_user, smtp_password)
+                server.send_message(msg)
+        else:
+            # Use TLS connection for TLS ports
+            with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
+                server.set_debuglevel(0)  # Set to 1 for debugging
+                server.starttls()
+                server.login(smtp_user, smtp_password)
+                server.send_message(msg)
+    except smtplib.SMTPAuthenticationError as e:
+        error_msg = f"SMTP Authentication failed. Check your username and password. Error: {e}"
+        print(f"[SMTP ERROR] {error_msg}")
+        print(f"[SMTP DEBUG] Host: {smtp_host}, Port: {smtp_port}, User: {smtp_user}")
+        raise RuntimeError(error_msg) from e
+    except smtplib.SMTPSenderRefused as e:
+        # Handle sender errors
+        error_msg = f"SMTP sender error: {e}"
+        print(f"[SMTP ERROR] {error_msg}")
+        raise RuntimeError(error_msg) from e
+    except Exception as e:
+        error_msg = f"Failed to send email via SMTP2GO: {e}"
+        print(f"[SMTP ERROR] {error_msg}")
+        raise RuntimeError(error_msg) from e
+
+
+def _send_ios_email_safe(to_email: str) -> None:
+    """BackgroundTasks helper: never raises (so failures are logged instead of swallowed)."""
+    try:
+        _send_ios_email(to_email)
+        print(f"[ios-download] iOS email sent to {to_email}")
+    except Exception as e:
+        print(f"[ios-download] FAILED to send iOS email to {to_email}: {e}")
+        traceback.print_exc()
+
 def _send_partnership_inquiry_email(inquiry: PartnershipInquiry) -> None:
     """
     Sends partnership inquiry email to admin@crickcoachai.com with all form details.
@@ -503,6 +664,31 @@ async def request_app_download(request: AppDownloadRequest, background_tasks: Ba
         error_msg = str(e)
         error_trace = traceback.format_exc()
         print(f"[ERROR] Failed to send APK email to {request.email}:")
+        print(error_trace)
+        raise HTTPException(status_code=500, detail=f"Failed to send email: {error_msg}")
+
+@app.post("/api/ios-download")
+async def request_ios_download(request: AppDownloadRequest, background_tasks: BackgroundTasks):
+    """
+    Handle iOS download requests and email the TestFlight link.
+    """
+    try:
+        # In dev, it's better to fail loudly so the UI doesn't claim success when SMTP fails.
+        # Set EMAIL_SEND_MODE=background to queue sending after returning the response.
+        send_mode = os.getenv("EMAIL_SEND_MODE", "sync").lower().strip()
+        if send_mode == "background":
+            background_tasks.add_task(_send_ios_email_safe, str(request.email))
+        else:
+            _send_ios_email(str(request.email))
+        return {
+            "status": "success",
+            "message": "TestFlight link sent to your email."
+        }
+    except Exception as e:
+        # Log full error details for debugging
+        error_msg = str(e)
+        error_trace = traceback.format_exc()
+        print(f"[ERROR] Failed to send iOS email to {request.email}:")
         print(error_trace)
         raise HTTPException(status_code=500, detail=f"Failed to send email: {error_msg}")
 
