@@ -14,19 +14,17 @@ export default function CTA() {
   })
 
   const [email, setEmail] = useState('')
+  const [platform, setPlatform] = useState<'ios' | 'android'>('ios')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  
-  const [iosEmail, setIosEmail] = useState('')
-  const [iosLoading, setIosLoading] = useState(false)
-  const [iosSuccess, setIosSuccess] = useState(false)
 
-  const handleAppDownload = async (e: React.FormEvent) => {
+  const handleDownload = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
     try {
-      const response = await axios.post(`${apiBaseUrl}/app-download`, {
+      const endpoint = platform === 'ios' ? `${apiBaseUrl}/ios-download` : `${apiBaseUrl}/app-download`
+      const response = await axios.post(endpoint, {
         email,
       })
       
@@ -40,28 +38,6 @@ export default function CTA() {
       alert('Something went wrong. Please try again.')
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleIosDownload = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIosLoading(true)
-
-    try {
-      const response = await axios.post(`${apiBaseUrl}/ios-download`, {
-        email: iosEmail,
-      })
-      
-      if (response.data.status === 'success') {
-        setIosSuccess(true)
-        setIosEmail('')
-        setTimeout(() => setIosSuccess(false), 5000)
-      }
-    } catch (error) {
-      console.error('Error submitting iOS download request:', error)
-      alert('Something went wrong. Please try again.')
-    } finally {
-      setIosLoading(false)
     }
   }
 
@@ -91,18 +67,17 @@ export default function CTA() {
             Ready to <span className="text-gradient">Elevate</span> Your Game?
           </h2>
           <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-            Enter your email and we&apos;ll send you the download link for your device.
+            Download the CrickCoach AI app and start your journey to better performance today
           </p>
 
-          {/* Android App Download Form */}
+          {/* App Download Form */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-12"
           >
-            <h3 className="text-2xl font-semibold mb-4">Android</h3>
-            <form onSubmit={handleAppDownload} className="space-y-6">
+            <form onSubmit={handleDownload} className="space-y-6">
               <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
                 <input
                   type="email"
@@ -112,12 +87,26 @@ export default function CTA() {
                   required
                   className="flex-1 px-6 py-4 bg-graphite/50 border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
                 />
+                <select
+                  value={platform}
+                  onChange={(e) => setPlatform(e.target.value as 'ios' | 'android')}
+                  className="px-6 py-4 bg-graphite/50 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-accent transition-colors appearance-none cursor-pointer"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right 1rem center',
+                    paddingRight: '2.5rem'
+                  }}
+                >
+                  <option value="ios">iOS</option>
+                  <option value="android">Android</option>
+                </select>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="btn-premium px-8 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-premium px-8 py-4 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 >
-                  {loading ? 'Sending...' : 'Get Android APK'}
+                  {loading ? 'Sending...' : 'Get Download Link'}
                 </button>
               </div>
               
@@ -127,46 +116,7 @@ export default function CTA() {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-accent font-medium"
                 >
-                  ✓ APK sent to your email!
-                </motion.div>
-              )}
-            </form>
-          </motion.div>
-
-          {/* iOS App Download Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-12"
-          >
-            <h3 className="text-2xl font-semibold mb-4">iOS</h3>
-            <form onSubmit={handleIosDownload} className="space-y-6">
-              <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
-                <input
-                  type="email"
-                  value={iosEmail}
-                  onChange={(e) => setIosEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="flex-1 px-6 py-4 bg-graphite/50 border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
-                />
-                <button
-                  type="submit"
-                  disabled={iosLoading}
-                  className="btn-premium px-8 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {iosLoading ? 'Sending...' : 'Get iOS TestFlight Link'}
-                </button>
-              </div>
-              
-              {iosSuccess && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-accent font-medium"
-                >
-                  ✓ TestFlight link sent to your email!
+                  ✓ {platform === 'ios' ? 'TestFlight link' : 'APK'} sent to your email!
                 </motion.div>
               )}
             </form>
