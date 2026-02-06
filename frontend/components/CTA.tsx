@@ -91,7 +91,7 @@ export default function CTA() {
             Ready to <span className="text-gradient">Elevate</span> Your Game?
           </h2>
           <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-            Enter your email and we'll send you the download link for your device.
+            Enter your email and we&apos;ll send you the download link for your device.
           </p>
 
           {/* Android App Download Form */}
