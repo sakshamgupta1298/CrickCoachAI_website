@@ -73,9 +73,9 @@ def _send_apk_email(to_email: str) -> None:
     from_email = "CrickCoach AI <noreply@crickcoachai.com>"  # Verified domain
 
     # Google Drive download link
-    download_link = "https://drive.google.com/file/d/1mca_tis9k68q1VxL6VI9HqJRFx4BCUsY/view?usp=sharing"
+    download_link = "https://drive.google.com/file/d/1pS--q9jG0gGBpF7ar28ZqX_4DV5GoFpu/view?usp=sharing"
     # Direct download link (alternative format)
-    file_id = "1mca_tis9k68q1VxL6VI9HqJRFx4BCUsY"
+    file_id = "1pS--q9jG0gGBpF7ar28ZqX_4DV5GoFpu"
     direct_download_link = f"https://drive.google.com/uc?export=download&id={file_id}"
 
     if not smtp_host or not smtp_user or not smtp_password or not from_email:
@@ -607,7 +607,7 @@ async def check_config():
     config_status["smtp_configured"] = True
     
     # Check download link (hardcoded in the function)
-    download_link = "https://drive.google.com/file/d/1mca_tis9k68q1VxL6VI9HqJRFx4BCUsY/view?usp=sharing"
+    download_link = "https://drive.google.com/file/d/1pS--q9jG0gGBpF7ar28ZqX_4DV5GoFpu/view?usp=sharing"
     if download_link:
         config_status["download_link_configured"] = True
         config_status["download_link"] = download_link
