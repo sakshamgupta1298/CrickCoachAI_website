@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-gray-400 text-lg"
             >
-              Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              Last Updated: March 17, 2026
             </motion.p>
           </div>
 
@@ -68,10 +68,13 @@ export default function PrivacyPolicy() {
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Introduction</h2>
               <p className="text-gray-300 leading-relaxed">
-                Welcome to CrickCoach AI (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application, website, and services (collectively, the &quot;Service&quot;).
+                Welcome to CrickCoach AI (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are committed to protecting your privacy and ensuring the security of your personal information.
               </p>
               <p className="text-gray-300 leading-relaxed mt-4">
-                By using our Service, you agree to the collection and use of information in accordance with this policy. If you do not agree with our policies and practices, please do not use our Service.
+                This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application, website, and services (collectively, the &quot;Service&quot;).
+              </p>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                By using our Service, you agree to this Privacy Policy. If you do not agree, please do not use the Service.
               </p>
             </motion.div>
 
@@ -83,36 +86,49 @@ export default function PrivacyPolicy() {
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Information We Collect</h2>
+              <p className="text-gray-300 leading-relaxed">
+                We collect only the data necessary to provide and improve our core services.
+              </p>
               
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">1. Personal Information</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>Name and email address when you register or contact us</li>
+                <li>Name and email address (when registering or contacting us)</li>
                 <li>Organization or academy name (if applicable)</li>
-                <li>Contact information provided through partnership inquiries</li>
               </ul>
 
-              <h3 className="text-xl font-semibold mb-3 text-white mt-6">2. Video Content</h3>
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">2. Video Content &amp; AI Processing</h3>
               <p className="text-gray-300 leading-relaxed mb-3">
-                We collect user uploaded cricket videos to analyze technique. These videos are processed using our AI analysis system hosted on secure cloud servers. The video may be transmitted to third-party AI processing services for analysis.
+                We allow users to upload cricket videos for technique analysis.
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>Cricket technique videos you upload for analysis</li>
-                <li>Video metadata (duration, file size, format)</li>
-                <li>Analysis results and performance metrics generated from your videos</li>
+                <li>
+                  Videos are processed using our pose detection system to extract structured data such as body keypoints and movement metrics.
+                </li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4 font-semibold text-white">Important:</p>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>Raw video files are NOT shared with third-party AI services</li>
+                <li>Videos are used only within our system for processing and analysis</li>
+              </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                After processing, only non-visual structured data (e.g., numerical pose/keypoint data in CSV format) may be sent to third-party AI services such as Google Gemini to generate feedback and analysis.
+              </p>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                This processed data does not contain raw video or visual identity information.
+              </p>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">3. Usage Data</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>Device information (model, operating system, unique device identifiers)</li>
-                <li>App usage patterns and features accessed</li>
-                <li>Performance analytics and improvement tracking data</li>
+                <li>Device type, OS version</li>
+                <li>App usage patterns and features used</li>
+                <li>Performance and analytics data</li>
               </ul>
 
-              <h3 className="text-xl font-semibold mb-3 text-white mt-6">4. Technical Information</h3>
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">4. Technical Data</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>IP address and location data</li>
-                <li>Browser type and version (for web services)</li>
-                <li>Cookies and similar tracking technologies</li>
+                <li>IP address (for security and diagnostics)</li>
+                <li>Approximate location (derived from IP, not precise GPS)</li>
+                <li>Cookies (for web services)</li>
               </ul>
             </motion.div>
 
@@ -124,36 +140,50 @@ export default function PrivacyPolicy() {
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">How We Use Your Information</h2>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                We use your data only for legitimate purposes, including:
+              </p>
               <ul className="list-disc list-inside space-y-3 text-gray-300 ml-4">
-                <li>To provide, maintain, and improve our AI-powered cricket coaching services</li>
-                <li>The app may use on-device text-to-speech to read analysis results aloud. This processing happens locally on the user&apos;s device and no data is transmitted externally.</li>
-                <li>To analyze your cricket technique videos and generate personalized feedback</li>
-                <li>To send you APK downloads, updates, and service-related communications</li>
-                <li>To respond to your inquiries, partnership requests, and provide customer support</li>
-                <li>To track your progress and provide performance analytics over time</li>
-                <li>To enhance our AI models and improve analysis accuracy</li>
-                <li>To detect, prevent, and address technical issues and security threats</li>
-                <li>To comply with legal obligations and enforce our terms of service</li>
+                <li>To provide AI-based cricket coaching and analysis</li>
+                <li>To process videos and generate feedback</li>
+                <li>To improve our AI models and accuracy</li>
+                <li>To provide performance tracking and insights</li>
+                <li>To communicate updates and support responses</li>
+                <li>To ensure security and prevent misuse</li>
+                <li>To comply with legal obligations</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-6">
+                <span className="font-semibold text-white">Text-to-Speech:</span> Our app may use on-device text-to-speech to read analysis results. This processing occurs locally and no data is shared externally.
+              </p>
             </motion.div>
 
-            {/* Data Storage and Security */}
+            {/* User Consent */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Data Storage and Security</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">User Consent</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                We implement appropriate technical and organizational security measures to protect your personal information and video content. However, no method of transmission over the internet or electronic storage is 100% secure.
+                We respect your right to control your data.
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>Your videos are encrypted during transmission and storage</li>
-                <li>Access to your data is restricted to authorized personnel only</li>
-                <li>We use secure servers and follow industry-standard security practices</li>
-                <li>Regular security audits and updates are performed</li>
+              <ul className="list-disc list-inside space-y-3 text-gray-300 ml-4">
+                <li>
+                  Before uploading videos or using AI analysis features, users are clearly informed about how their data will be processed.
+                </li>
+                <li className="font-semibold text-white">
+                  Users must provide explicit consent before:
+                </li>
               </ul>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-10 mt-2">
+                <li>Uploading videos</li>
+                <li>Using AI-powered analysis features</li>
+                <li>Sharing processed data with third-party AI services</li>
+              </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                Users may choose not to use these features.
+              </p>
             </motion.div>
 
             {/* Data Sharing and Disclosure */}
@@ -165,14 +195,81 @@ export default function PrivacyPolicy() {
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Data Sharing and Disclosure</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                We do not sell your personal information or video content. We may share your information only in the following circumstances:
+                We do NOT sell your data.
+              </p>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                We may share data only in the following cases:
+              </p>
+
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">1. Third-Party AI Services</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>We may share processed, non-identifiable data (CSV format only) with Google Gemini to generate analysis.</li>
+              </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                These providers:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li><strong>Service Providers:</strong> With trusted third-party service providers who assist in operating our Service (e.g., cloud storage, email services, analytics)</li>
-                <li><strong>Legal Requirements:</strong> When required by law, court order, or government regulation</li>
-                <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets (with notice to users)</li>
-                <li><strong>With Your Consent:</strong> When you explicitly authorize us to share your information</li>
-                <li><strong>Coaches/Academies:</strong> If you are part of a coaching program, your data may be shared with your authorized coach or academy</li>
+                <li>Do not receive raw video</li>
+                <li>Are contractually obligated to protect your data</li>
+                <li>Cannot use your data for independent purposes</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">2. Service Providers</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>Cloud storage, analytics, and infrastructure providers</li>
+                <li>Only to operate and improve our service</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">3. Legal Requirements</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>When required by law or government authorities</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">4. Business Transfers</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>In case of merger, acquisition, or sale (with notice)</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">5. With Your Consent</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>When you explicitly approve sharing</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">Data Protection Standard</h3>
+              <p className="text-gray-300 leading-relaxed">
+                All third-party providers are required to maintain equal or higher levels of data protection as described in this policy.
+              </p>
+            </motion.div>
+
+            {/* Data Minimization */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Data Minimization</h2>
+              <p className="text-gray-300 leading-relaxed">
+                We only collect and process data that is strictly necessary to deliver core app functionality.
+              </p>
+            </motion.div>
+
+            {/* Data Storage and Security */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 1.0 }}
+              className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Data Storage and Security</h2>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                We implement strong security measures:
+              </p>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>Encryption during data transmission and storage</li>
+                <li>Restricted access to authorized personnel</li>
+                <li>Secure cloud infrastructure</li>
+                <li>Regular monitoring and updates</li>
               </ul>
             </motion.div>
 
@@ -180,57 +277,57 @@ export default function PrivacyPolicy() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.9 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Your Rights</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                You have the following rights regarding your personal information:
+                You have the right to:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li><strong>Access:</strong> Request a copy of your personal data</li>
-                <li><strong>Correction:</strong> Request correction of inaccurate or incomplete information</li>
-                <li><strong>Deletion:</strong> Request deletion of your personal data and videos</li>
-                <li><strong>Portability:</strong> Request transfer of your data to another service</li>
-                <li><strong>Opt-out:</strong> Unsubscribe from marketing communications</li>
-                <li><strong>Objection:</strong> Object to processing of your data for certain purposes</li>
+                <li>Access your data</li>
+                <li>Correct inaccurate data</li>
+                <li>Request deletion</li>
+                <li>Withdraw consent</li>
+                <li>Object to certain processing</li>
+                <li>Request data portability</li>
               </ul>
               <p className="text-gray-300 leading-relaxed mt-4">
-                To exercise these rights, please contact us at <a href="mailto:admin@crickcoachai.com" className="text-accent hover:underline">admin@crickcoachai.com</a>
+                To exercise these rights, contact:{' '}
+                <a href="mailto:admin@crickcoachai.com" className="text-accent hover:underline">
+                  admin@crickcoachai.com
+                </a>
               </p>
             </motion.div>
 
-            {/* Cookies and Tracking */}
+            {/* Withdrawal of Consent */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.0 }}
+              transition={{ duration: 0.6, delay: 1.2 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Cookies and Tracking Technologies</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Withdrawal of Consent</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                We use cookies and similar tracking technologies to track activity on our Service and store certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
+                You can withdraw your consent at any time by:
               </p>
-              <p className="text-gray-300 leading-relaxed">
-                Types of cookies we use:
-              </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4 mt-2">
-                <li><strong>Essential Cookies:</strong> Required for the Service to function properly</li>
-                <li><strong>Analytics Cookies:</strong> Help us understand how users interact with our Service</li>
-                <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>Stopping use of AI features</li>
+                <li>Requesting deletion of your data</li>
+                <li>Contacting us directly</li>
               </ul>
             </motion.div>
 
-            {/* Children&apos;s Privacy */}
+            {/* Account Deletion */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.1 }}
+              transition={{ duration: 0.6, delay: 1.3 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Children&apos;s Privacy</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Account Deletion</h2>
               <p className="text-gray-300 leading-relaxed">
-                Our Service is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information.
+                You can request account deletion at any time. (Ensure this feature is also available inside the app to comply with Apple guidelines.)
               </p>
             </motion.div>
 
@@ -238,12 +335,32 @@ export default function PrivacyPolicy() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.2 }}
+              transition={{ duration: 0.6, delay: 1.4 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Data Retention</h2>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>Data is retained only as long as necessary</li>
+                <li>
+                  Upon account deletion:
+                  <ul className="list-disc list-inside space-y-2 text-gray-300 ml-6 mt-2">
+                    <li>Data is deleted or anonymized within 30 days</li>
+                  </ul>
+                </li>
+                <li>Some data may be retained if required by law</li>
+              </ul>
+            </motion.div>
+
+            {/* Children’s Privacy */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 1.5 }}
+              className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Children’s Privacy</h2>
               <p className="text-gray-300 leading-relaxed">
-                We retain your personal information and video content for as long as necessary to provide our services, comply with legal obligations, resolve disputes, and enforce our agreements. When you delete your account, we will delete or anonymize your personal data within 30 days, unless we are required to retain it for legal purposes.
+                Our service is not intended for children under 13. We do not knowingly collect data from children. If detected, it will be deleted immediately.
               </p>
             </motion.div>
 
@@ -251,12 +368,12 @@ export default function PrivacyPolicy() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.3 }}
+              transition={{ duration: 0.6, delay: 1.6 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">International Data Transfers</h2>
               <p className="text-gray-300 leading-relaxed">
-                Your information may be transferred to and processed in countries other than your country of residence. These countries may have data protection laws that differ from those in your country. By using our Service, you consent to the transfer of your information to these countries.
+                Your data may be processed in countries outside your location. We ensure appropriate safeguards are in place.
               </p>
             </motion.div>
 
@@ -264,12 +381,12 @@ export default function PrivacyPolicy() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.4 }}
+              transition={{ duration: 0.6, delay: 1.7 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Changes to This Privacy Policy</h2>
               <p className="text-gray-300 leading-relaxed">
-                We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the &quot;Last Updated&quot; date. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+                We may update this policy periodically. Updates will be posted with a revised “Last Updated” date.
               </p>
             </motion.div>
 
@@ -277,16 +394,23 @@ export default function PrivacyPolicy() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.5 }}
+              transition={{ duration: 0.6, delay: 1.8 }}
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Contact Us</h2>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                If you have any questions about this Privacy Policy or our data practices, please contact us:
-              </p>
               <div className="text-gray-300 space-y-2">
-                <p><strong>Email:</strong> <a href="mailto:admin@crickcoachai.com" className="text-accent hover:underline">admin@crickcoachai.com</a></p>
-                <p><strong>Website:</strong> <a href="https://www.crickcoachai.com" className="text-accent hover:underline">www.crickcoachai.com</a></p>
+                <p>
+                  <strong>Email:</strong>{' '}
+                  <a href="mailto:admin@crickcoachai.com" className="text-accent hover:underline">
+                    admin@crickcoachai.com
+                  </a>
+                </p>
+                <p>
+                  <strong>Website:</strong>{' '}
+                  <a href="https://www.crickcoachai.com" className="text-accent hover:underline">
+                    https://www.crickcoachai.com
+                  </a>
+                </p>
               </div>
             </motion.div>
           </div>
