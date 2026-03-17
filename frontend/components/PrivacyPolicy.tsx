@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
                 This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application, website, and services (collectively, the &quot;Service&quot;).
               </p>
               <p className="text-gray-300 leading-relaxed mt-4">
-                By using our Service, you agree to this Privacy Policy. If you do not agree, please do not use the Service.
+                By using our Service, and where required, providing explicit consent within the app, you agree to this Privacy Policy. If you do not agree, please do not use the Service.
               </p>
             </motion.div>
 
@@ -203,7 +203,7 @@ export default function PrivacyPolicy() {
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">1. Third-Party AI Services</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>We may share processed, non-identifiable data (CSV format only) with Google Gemini to generate analysis.</li>
+                <li>We may share processed, non-identifiable data (CSV format only) with Google Gemini to generate personalized cricket analysis and feedback for the user.</li>
               </ul>
               <p className="text-gray-300 leading-relaxed mt-4">
                 These providers:
@@ -237,7 +237,7 @@ export default function PrivacyPolicy() {
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">Data Protection Standard</h3>
               <p className="text-gray-300 leading-relaxed">
-                All third-party providers are required to maintain equal or higher levels of data protection as described in this policy.
+                All third-party service providers are contractually obligated to provide the same level of data protection as described in this Privacy Policy and in accordance with applicable privacy laws.
               </p>
             </motion.div>
 
@@ -288,7 +288,6 @@ export default function PrivacyPolicy() {
                 <li>Access your data</li>
                 <li>Correct inaccurate data</li>
                 <li>Request deletion</li>
-                <li>Withdraw consent</li>
                 <li>Object to certain processing</li>
                 <li>Request data portability</li>
               </ul>
@@ -298,24 +297,6 @@ export default function PrivacyPolicy() {
                   admin@crickcoachai.com
                 </a>
               </p>
-            </motion.div>
-
-            {/* Withdrawal of Consent */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.2 }}
-              className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
-            >
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Withdrawal of Consent</h2>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                You can withdraw your consent at any time by:
-              </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>Stopping use of AI features</li>
-                <li>Requesting deletion of your data</li>
-                <li>Contacting us directly</li>
-              </ul>
             </motion.div>
 
             {/* Account Deletion */}
@@ -386,7 +367,7 @@ export default function PrivacyPolicy() {
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Changes to This Privacy Policy</h2>
               <p className="text-gray-300 leading-relaxed">
-                We may update this policy periodically. Updates will be posted with a revised “Last Updated” date.
+                We may update this policy periodically. Updates will be posted with a revised &quot;Last Updated&quot; date.
               </p>
             </motion.div>
 
