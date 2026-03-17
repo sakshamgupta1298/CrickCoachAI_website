@@ -100,21 +100,28 @@ export default function PrivacyPolicy() {
               <p className="text-gray-300 leading-relaxed mb-3">
                 We allow users to upload cricket videos for technique analysis.
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>
-                  Videos are processed using our pose detection system to extract structured data such as body keypoints and movement metrics.
-                </li>
-              </ul>
+              <p className="text-gray-300 leading-relaxed mb-3">
+                Videos are processed using our pose detection system to extract structured data such as body keypoints and movement metrics.
+              </p>
               <p className="text-gray-300 leading-relaxed mt-4 font-semibold text-white">Important:</p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>Raw video files are NOT shared with third-party AI services</li>
                 <li>Videos are used only within our system for processing and analysis</li>
               </ul>
               <p className="text-gray-300 leading-relaxed mt-4">
-                After processing, only non-visual structured data (e.g., numerical pose/keypoint data in CSV format) may be sent to third-party AI services such as Google Gemini to generate feedback and analysis.
+                After processing, only non-visual structured data may be sent to a third-party AI service to generate feedback and analysis.
               </p>
               <p className="text-gray-300 leading-relaxed mt-4">
-                This processed data does not contain raw video or visual identity information.
+                Specifically, when you provide permission in the in-app prompt, we may send the following categories of data to Google Gemini (Google LLC):
+              </p>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                <li>Pose/keypoint time-series data (e.g., per-frame joint coordinates and confidence scores)</li>
+                <li>Derived motion/biomechanics metrics computed from those keypoints</li>
+                <li>Your selected coaching context (e.g., player type, playing side, shot/bowling/keeping type, requested plan length)</li>
+                <li>For optional features like training plans or comparisons: prior analysis summaries/metrics needed to generate the requested output</li>
+              </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                This processed data does not include your raw video file.
               </p>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">3. Usage Data</h3>
@@ -165,24 +172,18 @@ export default function PrivacyPolicy() {
               className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">User Consent</h2>
+              <p className="text-gray-300 leading-relaxed mb-4">We respect your right to control your data.</p>
               <p className="text-gray-300 leading-relaxed mb-4">
-                We respect your right to control your data.
+                Before we send any personal data to a third-party AI service (including processed movement data derived from your video), we present an in-app notice that explains what will be shared and with whom.
               </p>
-              <ul className="list-disc list-inside space-y-3 text-gray-300 ml-4">
-                <li>
-                  Before uploading videos or using AI analysis features, users are clearly informed about how their data will be processed.
-                </li>
-                <li className="font-semibold text-white">
-                  Users must provide explicit consent before:
-                </li>
-              </ul>
-              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-10 mt-2">
+              <p className="text-gray-300 leading-relaxed mb-2 font-semibold text-white">Users must provide explicit consent before:</p>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>Uploading videos</li>
                 <li>Using AI-powered analysis features</li>
                 <li>Sharing processed data with third-party AI services</li>
               </ul>
               <p className="text-gray-300 leading-relaxed mt-4">
-                Users may choose not to use these features.
+                If you do not consent, you can still use non-AI parts of the app, but features that require third-party AI processing may be unavailable.
               </p>
             </motion.div>
 
@@ -202,40 +203,56 @@ export default function PrivacyPolicy() {
               </p>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">1. Third-Party AI Services</h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
-                <li>We may share processed, non-identifiable data (CSV format only) with Google Gemini to generate personalized cricket analysis and feedback for the user.</li>
-              </ul>
-              <p className="text-gray-300 leading-relaxed mt-4">
-                These providers:
+              <p className="text-gray-300 leading-relaxed">
+                If you provide permission in the app, we may share processed movement data (pose/keypoint time-series and derived metrics) and relevant user-selected context with Google Gemini (Google LLC) to generate personalized cricket analysis, comparisons, and training plans.
               </p>
+              <p className="text-gray-300 leading-relaxed mt-4">These providers:</p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>Do not receive raw video</li>
-                <li>Are contractually obligated to protect your data</li>
-                <li>Cannot use your data for independent purposes</li>
+                <li>Receive only the minimum data needed to generate the requested output</li>
+                <li>Are required to protect the data with safeguards that are equal to or stronger than those described in this policy</li>
               </ul>
 
-              <h3 className="text-xl font-semibold mb-3 text-white mt-6">2. Service Providers</h3>
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">2. Authentication Providers</h3>
+              <p className="text-gray-300 leading-relaxed">
+                If you choose to sign in with Google or Apple, your sign-in is handled by Google LLC or Apple Inc. We receive basic profile information (such as name and email) from those providers to create/secure your account.
+              </p>
+
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">3. Email Delivery Providers</h3>
+              <p className="text-gray-300 leading-relaxed">
+                If you request an email verification code or password reset, we share your email address and the email content with our email delivery provider (e.g., SMTP2GO) to send that message.
+              </p>
+
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">4. Service Providers</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>Cloud storage, analytics, and infrastructure providers</li>
                 <li>Only to operate and improve our service</li>
               </ul>
 
-              <h3 className="text-xl font-semibold mb-3 text-white mt-6">3. Legal Requirements</h3>
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">5. Legal Requirements</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>When required by law or government authorities</li>
               </ul>
 
-              <h3 className="text-xl font-semibold mb-3 text-white mt-6">4. Business Transfers</h3>
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">6. Business Transfers</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>In case of merger, acquisition, or sale (with notice)</li>
               </ul>
 
-              <h3 className="text-xl font-semibold mb-3 text-white mt-6">5. With Your Consent</h3>
+              <h3 className="text-xl font-semibold mb-3 text-white mt-6">7. With Your Consent</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>When you explicitly approve sharing</li>
               </ul>
+            </motion.div>
 
-              <h3 className="text-xl font-semibold mb-3 text-white mt-6">Data Protection Standard</h3>
+            {/* Data Protection Standard */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className="bg-graphite/50 backdrop-blur-sm rounded-2xl border border-gray-800 p-8 md:p-12"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Data Protection Standard</h2>
               <p className="text-gray-300 leading-relaxed">
                 All third-party service providers are contractually obligated to provide the same level of data protection as described in this Privacy Policy and in accordance with applicable privacy laws.
               </p>
