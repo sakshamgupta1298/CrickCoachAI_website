@@ -86,3 +86,4 @@ echo "   cd $FRONTEND_DIR"
 echo "   pm2 start 'npm start' --name crickcoachai-frontend"
 echo "   pm2 save"
 
+

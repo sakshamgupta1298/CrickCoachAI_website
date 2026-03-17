@@ -92,6 +92,9 @@ export default function PrivacyPolicy() {
               </ul>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">2. Video Content</h3>
+              <p className="text-gray-300 leading-relaxed mb-3">
+                We collect user uploaded cricket videos to analyze technique. These videos are processed using our AI analysis system hosted on secure cloud servers. The video may be transmitted to third-party AI processing services for analysis.
+              </p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>Cricket technique videos you upload for analysis</li>
                 <li>Video metadata (duration, file size, format)</li>
@@ -123,6 +126,7 @@ export default function PrivacyPolicy() {
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">How We Use Your Information</h2>
               <ul className="list-disc list-inside space-y-3 text-gray-300 ml-4">
                 <li>To provide, maintain, and improve our AI-powered cricket coaching services</li>
+                <li>The app may use on-device text-to-speech to read analysis results aloud. This processing happens locally on the user&apos;s device and no data is transmitted externally.</li>
                 <li>To analyze your cricket technique videos and generate personalized feedback</li>
                 <li>To send you APK downloads, updates, and service-related communications</li>
                 <li>To respond to your inquiries, partnership requests, and provide customer support</li>
