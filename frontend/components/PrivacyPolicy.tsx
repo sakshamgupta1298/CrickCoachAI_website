@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-gray-400 text-lg"
             >
-              Last Updated: March 17, 2026
+              Last Updated: March 19, 2026
             </motion.p>
           </div>
 
@@ -74,7 +74,10 @@ export default function PrivacyPolicy() {
                 This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application, website, and services (collectively, the &quot;Service&quot;).
               </p>
               <p className="text-gray-300 leading-relaxed mt-4">
-                By using our Service, and where required, providing explicit consent within the app, you agree to this Privacy Policy. If you do not agree, please do not use the Service.
+                Where required by law and platform rules, we ask for explicit in-app consent before collecting, using, or sharing personal data with third-party AI providers.
+              </p>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                If you do not agree with this policy or do not provide required consent, you can continue using non-AI features, but AI features that require third-party processing will be unavailable.
               </p>
             </motion.div>
 
@@ -95,6 +98,9 @@ export default function PrivacyPolicy() {
                 <li>Name and email address (when registering or contacting us)</li>
                 <li>Organization or academy name (if applicable)</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                We collect this information directly from you when you create an account, update your profile, contact support, or submit forms in the app or website.
+              </p>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">2. Video Content &amp; AI Processing</h3>
               <p className="text-gray-300 leading-relaxed mb-3">
@@ -123,6 +129,9 @@ export default function PrivacyPolicy() {
               <p className="text-gray-300 leading-relaxed mt-4">
                 This processed data does not include your raw video file.
               </p>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                We collect this information from your video upload and from our internal processing pipeline that extracts keypoints and performance metrics.
+              </p>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">3. Usage Data</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
@@ -130,6 +139,9 @@ export default function PrivacyPolicy() {
                 <li>App usage patterns and features used</li>
                 <li>Performance and analytics data</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                We collect this automatically through app events, logs, and diagnostics when you use the Service.
+              </p>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">4. Technical Data</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
@@ -137,6 +149,9 @@ export default function PrivacyPolicy() {
                 <li>Approximate location (derived from IP, not precise GPS)</li>
                 <li>Cookies (for web services)</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                We collect this automatically from your device and network connection when requests are made to our servers.
+              </p>
             </motion.div>
 
             {/* How We Use Your Information */}
@@ -160,6 +175,9 @@ export default function PrivacyPolicy() {
                 <li>To comply with legal obligations</li>
               </ul>
               <p className="text-gray-300 leading-relaxed mt-6">
+                We do not use personal data for third-party advertising or data brokerage.
+              </p>
+              <p className="text-gray-300 leading-relaxed mt-6">
                 <span className="font-semibold text-white">Text-to-Speech:</span> Our app may use on-device text-to-speech to read analysis results. This processing occurs locally and no data is shared externally.
               </p>
             </motion.div>
@@ -176,6 +194,9 @@ export default function PrivacyPolicy() {
               <p className="text-gray-300 leading-relaxed mb-4">
                 Before we send any personal data to a third-party AI service (including processed movement data derived from your video), we present an in-app notice that explains what will be shared and with whom.
               </p>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                The notice identifies: (1) data categories shared, (2) the recipient provider, and (3) the purpose of sharing. You must tap an explicit consent action before any sharing occurs.
+              </p>
               <p className="text-gray-300 leading-relaxed mb-2 font-semibold text-white">Users must provide explicit consent before:</p>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
                 <li>Uploading videos</li>
@@ -184,6 +205,9 @@ export default function PrivacyPolicy() {
               </ul>
               <p className="text-gray-300 leading-relaxed mt-4">
                 If you do not consent, you can still use non-AI parts of the app, but features that require third-party AI processing may be unavailable.
+              </p>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                You can withdraw consent at any time from in-app privacy controls (or by contacting us). After withdrawal, we stop new third-party AI sharing for your account, except where processing is required to complete a request you already submitted.
               </p>
             </motion.div>
 
@@ -200,6 +224,9 @@ export default function PrivacyPolicy() {
               </p>
               <p className="text-gray-300 leading-relaxed mb-4">
                 We may share data only in the following cases:
+              </p>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                The main third parties and data categories are listed below so users can clearly understand what is shared and why.
               </p>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">1. Third-Party AI Services</h3>
@@ -228,6 +255,9 @@ export default function PrivacyPolicy() {
                 <li>Cloud storage, analytics, and infrastructure providers</li>
                 <li>Only to operate and improve our service</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                We require these providers to handle data only under our instructions and to provide protections that are the same as or stronger than the protections described in this policy.
+              </p>
 
               <h3 className="text-xl font-semibold mb-3 text-white mt-6">5. Legal Requirements</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-300 ml-4">
@@ -347,6 +377,9 @@ export default function PrivacyPolicy() {
                 </li>
                 <li>Some data may be retained if required by law</li>
               </ul>
+              <p className="text-gray-300 leading-relaxed mt-4">
+                AI request/response records and operational logs are retained only for service delivery, security, and troubleshooting, then deleted or anonymized based on our retention schedule.
+              </p>
             </motion.div>
 
             {/* Children’s Privacy */}
