@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-gray-400 text-lg"
             >
-              Last Updated: March 19, 2026
+              Last Updated: March 20, 2026
             </motion.p>
           </div>
 
