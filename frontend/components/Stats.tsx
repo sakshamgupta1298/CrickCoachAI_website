@@ -8,13 +8,12 @@ interface Stat {
   value: string
   label: string
   suffix?: string
-  icon?: string
   subLabel?: string
 }
 
 const stats: Stat[] = [
-  { value: '123', label: 'Total Users', icon: '👥' },
-  { value: '280', label: 'Total Analyses', icon: '📊', subLabel: 'on the website in 2 months' },
+  { value: '123', label: 'Total Users' },
+  { value: '280', label: 'Total Analyses', subLabel: 'on the website in 2 months' },
 ]
 
 function AnimatedNumber({ value, suffix = '' }: { value: string; suffix?: string }) {
@@ -58,7 +57,7 @@ export default function Stats() {
   return (
     <section
       ref={ref}
-      className="section bg-gradient-to-b from-charcoal to-graphite relative overflow-hidden"
+      className="bg-gradient-to-b from-charcoal to-graphite relative overflow-hidden py-16 md:py-24"
       id="stats"
     >
       {/* Background effects */}
@@ -72,7 +71,7 @@ export default function Stats() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Trusted by <span className="text-gradient">Cricket Community</span>
@@ -98,7 +97,6 @@ export default function Stats() {
                   '0'
                 )}
               </div>
-              {stat.icon && <div className="text-3xl mb-1">{stat.icon}</div>}
               <div className="text-gray-400 text-sm md:text-base font-medium">
                 {stat.label}
                 {stat.subLabel && (
