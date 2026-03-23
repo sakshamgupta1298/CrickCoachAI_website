@@ -6,6 +6,7 @@ import Features from '@/components/Features'
 import HowItWorks from '@/components/HowItWorks'
 import Testimonials from '@/components/Testimonials'
 import CTA from '@/components/CTA'
+import Stats from '@/components/Stats'
 import Footer from '@/components/Footer'
 import Navigation from '@/components/Navigation'
 
@@ -27,6 +28,7 @@ export default function Home() {
     <main className="relative">
       <Navigation />
       <Hero />
+      <Stats />
       <Features />
       <HowItWorks />
       <Testimonials />

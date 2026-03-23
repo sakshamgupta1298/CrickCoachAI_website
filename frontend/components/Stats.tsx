@@ -8,14 +8,13 @@ interface Stat {
   value: string
   label: string
   suffix?: string
+  icon?: string
+  subLabel?: string
 }
 
 const stats: Stat[] = [
-  { value: '12500', label: 'Players Coached', suffix: '+' },
-  { value: '45000', label: 'Videos Analyzed', suffix: '+' },
-  { value: '320', label: 'Coaches Using', suffix: '+' },
-  { value: '45', label: 'Academies Partnered', suffix: '+' },
-  { value: '23', label: 'Avg Improvement', suffix: '%' },
+  { value: '123', label: 'Total Users', icon: '👥' },
+  { value: '280', label: 'Total Analyses', icon: '📊', subLabel: 'on the website in 2 months' },
 ]
 
 function AnimatedNumber({ value, suffix = '' }: { value: string; suffix?: string }) {
@@ -83,7 +82,7 @@ export default function Stats() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -99,8 +98,14 @@ export default function Stats() {
                   '0'
                 )}
               </div>
+              {stat.icon && <div className="text-3xl mb-1">{stat.icon}</div>}
               <div className="text-gray-400 text-sm md:text-base font-medium">
                 {stat.label}
+                {stat.subLabel && (
+                  <div className="text-xs md:text-sm text-gray-500 mt-1">
+                    {stat.subLabel}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
