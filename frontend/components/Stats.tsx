@@ -12,8 +12,8 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: '123', label: 'Total Users' },
-  { value: '280', label: 'Total Analyses', subLabel: 'on the website in 2 months' },
+  { value: '123+', label: 'Total Users' },
+  { value: '280+', label: 'Total Analyses', subLabel: 'on the app in 2 months' },
 ]
 
 function AnimatedNumber({ value, suffix = '' }: { value: string; suffix?: string }) {
@@ -77,7 +77,7 @@ export default function Stats() {
             Trusted by <span className="text-gradient">Cricket Community</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Join thousands of players, coaches, and academies transforming cricket performance with AI
+            Join hundreds of players, coaches, and academies transforming cricket performance with AI
           </p>
         </motion.div>
 
