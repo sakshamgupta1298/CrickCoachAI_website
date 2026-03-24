@@ -1,33 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [mounted, setMounted] = useState(false)
   const [showVideoModal, setShowVideoModal] = useState(false)
-  const [particles, setParticles] = useState<Array<{ x: number; y: number; targetY: number; duration: number; delay: number }>>([])
-
-  useEffect(() => {
-    setMounted(true)
-    // Generate particles only on client
-    if (typeof window !== 'undefined') {
-      const width = window.innerWidth || 1920
-      const height = window.innerHeight || 1080
-      const particleData = Array.from({ length: 20 }, () => {
-        const initialY = Math.random() * height
-        return {
-          x: Math.random() * width,
-          y: initialY,
-          targetY: Math.random() * height,
-          duration: 3 + Math.random() * 2,
-          delay: Math.random() * 2,
-        }
-      })
-      setParticles(particleData)
-    }
-  }, [])
 
   return (
     <section
@@ -46,32 +24,6 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/55" />
       <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/70 via-charcoal/60 to-charcoal/85" />
       
-      {/* Animated background particles */}
-      {mounted && (
-        <div className="absolute inset-0 overflow-hidden">
-          {particles.map((particle, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-accent rounded-full"
-              initial={{
-                x: particle.x,
-                y: particle.y,
-                opacity: 0.3,
-              }}
-              animate={{
-                y: [particle.y, particle.targetY, particle.y],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: particle.duration,
-                repeat: Infinity,
-                delay: particle.delay,
-              }}
-            />
-          ))}
-        </div>
-      )}
-
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 flex items-center justify-center">
         {/* Text Content */}
         <motion.div
