@@ -35,8 +35,16 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       id="hero"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-deep-navy via-charcoal to-charcoal" />
+      {/* Cricket-themed background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1593766788306-28561086694e?auto=format&fit=crop&w=1920&q=80')",
+        }}
+      />
+      <div className="absolute inset-0 bg-black/55" />
+      <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/70 via-charcoal/60 to-charcoal/85" />
       
       {/* Animated background particles */}
       {mounted && (
