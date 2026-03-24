@@ -40,7 +40,7 @@ export default function Hero() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1593766788306-28561086694e?auto=format&fit=crop&w=1920&q=80')",
+            "url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1920&q=80')",
         }}
       />
       <div className="absolute inset-0 bg-black/55" />
