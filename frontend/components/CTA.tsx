@@ -1,45 +1,15 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import axios from 'axios'
+import Image from 'next/image'
 import PartnershipForm from './PartnershipForm'
 
 export default function CTA() {
-  const apiBaseUrl = "/api" 
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   })
-
-  const [email, setEmail] = useState('')
-  const [platform, setPlatform] = useState<'ios' | 'android'>('ios')
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-
-  const handleDownload = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-
-    try {
-      const endpoint = platform === 'ios' ? `${apiBaseUrl}/ios-download` : `${apiBaseUrl}/app-download`
-      const response = await axios.post(endpoint, {
-        email,
-      })
-      
-      if (response.data.status === 'success') {
-        setSuccess(true)
-        setEmail('')
-        setTimeout(() => setSuccess(false), 5000)
-      }
-    } catch (error) {
-      console.error('Error submitting download request:', error)
-      alert('Something went wrong. Please try again.')
-    } finally {
-      setLoading(false)
-    }
-  }
 
   return (
     <section
@@ -70,56 +40,45 @@ export default function CTA() {
             Download the CrickCoach AI app and start your journey to better performance today
           </p>
 
-          {/* App Download Form */}
+          {/* Store Badges */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-12"
           >
-            <form onSubmit={handleDownload} className="space-y-6">
-              <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="flex-1 px-6 py-4 bg-graphite/50 border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="https://apps.apple.com/us/app/crickcoach-ai/id6758755963"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                aria-label="Download on the App Store"
+              >
+                <Image
+                  src="/app-store-badge.svg"
+                  alt="Download on the App Store"
+                  width={180}
+                  height={54}
+                  priority
                 />
-                <select
-                  value={platform}
-                  onChange={(e) => setPlatform(e.target.value as 'ios' | 'android')}
-                  className="px-6 py-4 bg-graphite/50 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-accent transition-colors appearance-none cursor-pointer"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'right 1rem center',
-                    paddingRight: '2.5rem'
-                  }}
-                >
-                  <option value="ios">iOS</option>
-                  <option value="android">Android</option>
-                </select>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn-premium px-8 py-4 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                >
-                  {loading ? 'Sending...' : 'Get Download Link'}
-                </button>
-              </div>
-              
-              {success && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-accent font-medium"
-                >
-                  ✓ {platform === 'ios' ? 'TestFlight link' : 'APK'} sent to your email!
-                </motion.div>
-              )}
-            </form>
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.saksham_5.cricketcoachmobile"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                aria-label="Get it on Google Play"
+              >
+                <Image
+                  src="/google-play-badge.svg"
+                  alt="Get it on Google Play"
+                  width={180}
+                  height={54}
+                  priority
+                />
+              </a>
+            </div>
           </motion.div>
 
           {/* Partnership CTA */}
