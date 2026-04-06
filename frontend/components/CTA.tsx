@@ -56,7 +56,7 @@ export default function CTA() {
                 aria-label="Download on the App Store"
               >
                 <Image
-                  src="/app-store-badge.svg"
+                  src="/app-store-badge.png"
                   alt="Download on the App Store"
                   width={180}
                   height={54}
@@ -71,7 +71,7 @@ export default function CTA() {
                 aria-label="Get it on Google Play"
               >
                 <Image
-                  src="/google-play-badge.svg"
+                  src="/google-play-badge.png"
                   alt="Get it on Google Play"
                   width={180}
                   height={54}
