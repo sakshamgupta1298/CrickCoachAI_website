@@ -12,8 +12,8 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: '123', label: 'Total Users', suffix: '+' },
-  { value: '280', label: 'Total Analyses', suffix: '+', subLabel: 'on the app in 2 months' },
+  { value: '170', label: 'Total Users', suffix: '+' },
+  { value: '400', label: 'Total Analyses', suffix: '+', subLabel: 'on the app in 2 months' },
 ]
 
 function AnimatedNumber({ value, suffix = '' }: { value: string; suffix?: string }) {
