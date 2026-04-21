@@ -12,7 +12,7 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: '200', label: 'Total Users', suffix: '+' },
+  { value: '170', label: 'Total Users', suffix: '+' },
   { value: '400', label: 'Total Analyses', suffix: '+', subLabel: 'on the app in 2 months' },
 ]
 
